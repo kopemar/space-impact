@@ -7,7 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 public class CustomGameFormTest {
-    Game game;
+    private Game game;
     @Before
     public void setUp() {
         game = new Game();
@@ -24,6 +24,24 @@ public class CustomGameFormTest {
         } catch (WrongUserInputException e) {
             e.printStackTrace();
         }
+    }
+
+    // PASSED but this leads to infinite loop - is something wrong with Game->generateEnemies()
+    @Test
+    public void infLoopCombination() {
+        try {
+            game.setOverallX(2);
+            game.setGenerationX(1);
+            game.setGenerationY(3);
+            game.setLifeCount(1);
+            game.setLifeWorth(1);
+            game.setEnemyCount(1);
+        } catch (WrongUserInputException e) {
+            e.printStackTrace();
+            Assert.fail();
+        }
+        Assert.assertEquals(1, game.getEnemiesRemaining());
+        Assert.assertEquals(2, game.getOverallX());
     }
 
     @Test(expected = WrongUserInputException.class)

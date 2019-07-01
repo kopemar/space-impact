@@ -135,6 +135,8 @@ public class Game {
     public void setEnemiesRemaining(int count) {
         this.enemiesRemaining = count;
     }
+
+    // TODO - FIX: gets to infinite loop from time to time
     /**
      * Add enemies to HashMap enemies - render random positions (but check if the position is not taken already)
      */
@@ -150,6 +152,7 @@ public class Game {
             int x = getRandomX();
             int y = getRandomY();
             Enemy enemy = new Enemy(windowX, y);
+            GameLogger.getLOGGER().warning("Trying to add " + enemy + ": (" + x + ", " + y + ")" );
             addEnemy(x, y, enemy);
         }
     }
